@@ -1,4 +1,3 @@
-
 import 'package:flutter/widgets.dart';
 
 class CategoryListView extends StatelessWidget {
@@ -14,14 +13,12 @@ class CategoryListView extends StatelessWidget {
     return SizedBox(
       height: 100,
       child: ListView.builder(
-        shrinkWrap: true,
-        physics: const NeverScrollableScrollPhysics(),
+        physics: BouncingScrollPhysics(),
         scrollDirection: Axis.horizontal,
         itemCount: categoryList.length,
         itemBuilder: (context, index) {
-          return categoryList[index];
-        },
-      ),
+        return categoryList[index];
+      }),
     );
   }
 }
