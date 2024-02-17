@@ -48,7 +48,7 @@ class HomePage extends StatelessWidget {
           physics: BouncingScrollPhysics(),
           slivers: [
             SliverToBoxAdapter(child: CategoryListView(categoryList: categoryList)),
-            HeadLineScrollView(headLineCard: HeadLineCard()),
+            HeadLineScrollView(),
           ],
         ),
       ),

@@ -1,33 +1,35 @@
 import 'package:flutter/material.dart';
+import 'package:news_app/model/news_model.dart';
+import 'package:news_app/static_key/statics.dart';
 
 class HeadLineCard extends StatelessWidget {
-  const HeadLineCard({super.key});
-
+   HeadLineCard({super.key,required this.newsModel});
+  final NewsModel newsModel;
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(bottom:8.0),
+      padding: const EdgeInsets.only(bottom: 8.0),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
           ClipRRect(
             borderRadius: BorderRadius.circular(12),
             child: Image.network(
-              'https://cdn.iview.abc.net.au/thumbs/1200/nu/NU2402V_6593459a734a4_1920.jpg',
+              newsModel.image_url??Statics.imagefakeUrl,
               fit: BoxFit.cover,
             ),
           ),
-          const Text(
-            'hello from fox news gaza that all display the criminal of netiaho criminal',
+           Text(
+            newsModel.title,
             maxLines: 2,
             overflow: TextOverflow.ellipsis,
             style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700),
           ),
-          const Text(
-            'hello from fox news gaza that all display the criminal of netiaho criminal',
+           Text(
+            newsModel.text,
             maxLines: 2,
             overflow: TextOverflow.ellipsis,
-            style:  TextStyle(color: Colors.grey, fontWeight: FontWeight.w500),
+            style: TextStyle(color: Colors.grey, fontWeight: FontWeight.w500),
           )
         ],
       ),
