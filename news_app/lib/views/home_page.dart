@@ -4,6 +4,7 @@ import 'package:news_app/views/widgets/HeadLine_card.dart';
 import 'package:news_app/views/widgets/category_card.dart';
 import 'package:news_app/views/widgets/category_listView.dart';
 import 'package:news_app/views/widgets/headLine_scrollView.dart';
+import 'package:news_app/views/widgets/headLine_scrollView_builder.dart';
 
 class HomePage extends StatelessWidget {
   HomePage({super.key});
@@ -48,10 +49,12 @@ class HomePage extends StatelessWidget {
           physics: BouncingScrollPhysics(),
           slivers: [
             SliverToBoxAdapter(child: CategoryListView(categoryList: categoryList)),
-            HeadLineScrollView(),
+            HeadLineScrollViewBuilder(),
           ],
         ),
       ),
     );
   }
 }
+
+
