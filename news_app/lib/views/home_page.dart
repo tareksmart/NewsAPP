@@ -48,7 +48,8 @@ class HomePage extends StatelessWidget {
         child: CustomScrollView(
           physics: BouncingScrollPhysics(),
           slivers: [
-            SliverToBoxAdapter(child: CategoryListView(categoryList: categoryList)),
+            SliverToBoxAdapter(
+                child: CategoryListView(categoryList: categoryList)),
             HeadLineScrollViewBuilder(),
           ],
         ),
@@ -56,5 +57,3 @@ class HomePage extends StatelessWidget {
     );
   }
 }
-
-

@@ -3,7 +3,7 @@ import 'package:news_app/model/news_model.dart';
 import 'package:news_app/static_key/statics.dart';
 
 class HeadLineCard extends StatelessWidget {
-   HeadLineCard({super.key,required this.newsModel});
+  HeadLineCard({super.key, required this.newsModel});
   final NewsModel newsModel;
   @override
   Widget build(BuildContext context) {
@@ -14,18 +14,15 @@ class HeadLineCard extends StatelessWidget {
         children: [
           ClipRRect(
             borderRadius: BorderRadius.circular(12),
-            child: Image.network(
-              newsModel.image_url??Statics.imagefakeUrl,
-              fit: BoxFit.cover,
-            ),
+            child: ImageNetwork(newsModel: newsModel),
           ),
-           Text(
+          Text(
             newsModel.title,
             maxLines: 2,
             overflow: TextOverflow.ellipsis,
             style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700),
           ),
-           Text(
+          Text(
             newsModel.text,
             maxLines: 2,
             overflow: TextOverflow.ellipsis,
@@ -34,5 +31,29 @@ class HeadLineCard extends StatelessWidget {
         ],
       ),
     );
+  }
+}
+
+class ImageNetwork extends StatelessWidget {
+  const ImageNetwork({
+    super.key,
+    required this.newsModel,
+  });
+
+  final NewsModel newsModel;
+
+  @override
+  Widget build(BuildContext context) {
+    try {
+     
+      return  Image.network(
+        newsModel.image_url ?? Statics.imagefakeUrl,
+        errorBuilder: (context, error, stackTrace) =>
+            Image.asset('assets/notFound.jpg'),
+        fit: BoxFit.cover,
+      );
+    } on NetworkImageLoadException catch (e) {
+      return Image.asset('assets/notFound.jpg');
+    }
   }
 }
