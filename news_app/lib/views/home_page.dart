@@ -50,7 +50,7 @@ class HomePage extends StatelessWidget {
           slivers: [
             SliverToBoxAdapter(
                 child: CategoryListView(categoryList: categoryList)),
-            HeadLineScrollViewBuilder(),
+            HeadLineScrollViewBuilder(categoryName: 'general',),
           ],
         ),
       ),

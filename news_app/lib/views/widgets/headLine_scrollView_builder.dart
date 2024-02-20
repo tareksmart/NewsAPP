@@ -7,9 +7,9 @@ import '../../services/service.dart';
 
 class HeadLineScrollViewBuilder extends StatefulWidget {
   const HeadLineScrollViewBuilder({
-    super.key,
+    super.key, required this.categoryName,
   });
-
+  final String categoryName;
   @override
   State<HeadLineScrollViewBuilder> createState() =>
       _HeadLineScrollViewBuilderState();
@@ -23,7 +23,7 @@ class _HeadLineScrollViewBuilderState extends State<HeadLineScrollViewBuilder> {
     super.initState();
 
     // getGeneralNews();
-    future = Servic().getNews('hot');
+    future = Servic().getNews(widget.categoryName);
   }
 
   // List<NewsModel> newsM = [];

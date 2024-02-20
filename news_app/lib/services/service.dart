@@ -12,30 +12,43 @@ class Servic {
       Map<String, dynamic> jsonData = response.data;
       List<dynamic> newsList = jsonData['news'];
       List<NewsModel> newsM = [];
- print(response.data);
-      var image_url;
+
+      //var image_url;
 
       for (var item in newsList) {
-        // try {
-        //   () async {
-        //     Response responsImage = await dio.get(item['image']);
-        //     if (responsImage.statusCode! >= 200 &&
-        //         responsImage.statusCode! < 300) {
-        //       image_url = item['image'];
-        //       print(image_url);
-        //     }
-        //   };
-        // } on Exception catch (e) {
-        //   image_url = '';
-        // }
-        NewsModel newsModel = NewsModel(
-            title: item['title'], text: item['text'], image_url: item['image']);
+        try {
+          NewsModel newsModel = NewsModel(
+              title: item['title'],
+              text: item['text'],
+              image_url: await image_url(item['image']));
+          print('model ============');
+          print(newsModel);
+          print('model ============');
 
-        newsM.add(newsModel);
+          newsM.add(newsModel);
+        } on Exception catch (e) {
+          print(e.toString());
+        }
       }
       return newsM;
     } catch (e) {
       return [];
+    }
+  }
+
+  Future<String> image_url(String url) async {
+    try {
+      Response responsImage = await dio.get(url);
+      print(responsImage.data);
+      if (responsImage.statusCode! >= 200 && responsImage.statusCode! <= 300) {
+        print(url + ' success');
+        return url;
+      } else {
+        print(url + ' fail');
+      }
+    } finally {
+      print(url + 'finally');
+      return '';
     }
   }
 }
