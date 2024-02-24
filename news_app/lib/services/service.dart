@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:dio/dio.dart';
 import 'package:news_app/model/news_model.dart';
 import 'package:news_app/static_key/statics.dart';
@@ -7,32 +9,24 @@ class Servic {
 
   Future<List<NewsModel>> getNews(String cateName) async {
     try {
-      Statics.categ = cateName;
-      Response response = await dio.get(Statics.url);
+     
+      Response response = await dio.get(Statics.baseUrl(cateName));
       Map<String, dynamic> jsonData = response.data;
-      List<dynamic> newsList = jsonData['news'];
+      List<dynamic> newsList = jsonData['articles'];
       List<NewsModel> newsM = [];
 
-      //var image_url;
-
       for (var item in newsList) {
-        try {
-          NewsModel newsModel = NewsModel(
-              title: item['title'],
-              text: item['text'],
-              image_url: await image_url(item['image']));
-          print('model ============');
-          print(newsModel);
-          print('model ============');
-
-          newsM.add(newsModel);
-        } on Exception catch (e) {
-          print(e.toString());
-        }
+        NewsModel newsModel = NewsModel.fromJson(item);
+        newsM.add(newsModel);
       }
       return newsM;
-    } catch (e) {
-      return [];
+    } on DioException catch (e) {
+      final errorMessege =
+          e.response?.data['message'] ?? 'there is an error plz try later';
+      throw Exception(errorMessege);
+    } on Exception catch (e) {
+      print(e.toString());
+      throw Exception('there is an error plz try later');
     }
   }
 

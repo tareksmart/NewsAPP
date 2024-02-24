@@ -23,7 +23,7 @@ class HeadLineCard extends StatelessWidget {
             style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700),
           ),
           Text(
-            newsModel.text,
+            newsModel.text??'no description',
             maxLines: 2,
             overflow: TextOverflow.ellipsis,
             style: TextStyle(color: Colors.grey, fontWeight: FontWeight.w500),
